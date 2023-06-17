@@ -30,7 +30,7 @@ CREATE TABLE `post` (
   `created_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   CONSTRAINT `post_check` CHECK (octet_length(`username`) >= 3)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ UNLOCK TABLES;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_posts`()
 BEGIN
-	select id, username, content, image_url from post order by created_at desc;
+	select id, convert(username using "utf8") as username, convert(content using "utf8") as content, convert(image_url using "utf8") as image_url from post order by created_at desc;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -96,4 +96,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-17  9:59:33
+-- Dump completed on 2023-06-17 10:04:13
