@@ -9,7 +9,7 @@ def post_post():
     if(error != None):
         return make_response(jsonify(error), 400)
     
-    results = dbhelpers.run_procedure('call insert_post?,?,?)', 
+    results = dbhelpers.run_procedure('call insert_post(?,?,?)', 
                             [request.json.get("username"),request.json.get("content"),request.json.get("image_url")])
     
     if(type(results) == list):
